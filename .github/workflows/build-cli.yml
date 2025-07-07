@@ -14,12 +14,12 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 5.0.x
 
       - name: Restore dependencies
         run: dotnet restore AssetStudioCLI/AssetStudioCLI.csproj
 
-      - name: Build
+      - name: Build Cli
         run: dotnet build AssetStudioCLI/AssetStudioCLI.csproj -c Release
 
       - name: Upload AssetStudioCLI.exe
