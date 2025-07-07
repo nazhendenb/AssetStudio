@@ -1,0 +1,32 @@
+name: Build AssetStudioCLI
+
+on:
+  push:
+    paths:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore AssetStudioCLI/AssetStudioCLI.csproj
+
+      - name: Build
+        run: dotnet build AssetStudioCLI/AssetStudioCLI.csproj -c Release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: AssetStudioCLI
+          path: AssetStudioCLI/bin/Release/net6.0/AssetStudioCLI.exe
